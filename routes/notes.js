@@ -7,7 +7,7 @@ const readFromFile = util.promisify(fs.readFile);
 
 // GET Route for retrieving all the 
 note.get('/', (req, res) => {
-  res.send('Hello World!');
+  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 module.exports = note;
