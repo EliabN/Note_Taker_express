@@ -1,13 +1,14 @@
+// Import express
 const express = require('express');
+// Import path function
 const path = require('path');
+// Import path clog
 const { clog } = require('./middleware/clog');
+// Import path api from index.js
 const api = require('./routes/index.js');
-const { readAndAppend } = require('./helpers/fsUtils');
 
-// const util = require('util');
-// const fs = require('fs');
-// const readFromFile = util.promisify(fs.readFile);
 
+// Specify port
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -32,6 +33,7 @@ app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
+// Listen to port
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
 );
