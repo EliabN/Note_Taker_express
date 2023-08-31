@@ -37,7 +37,8 @@ note.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const data = await readFromFile('./db/db.json'); // Use await for asynchronous operations
+    // Use await for asynchronous operations
+    const data = await readFromFile('./db/db.json'); 
     const notes = JSON.parse(data);
     const noteIndex = notes.findIndex(note => note.id === id);
 
@@ -45,7 +46,7 @@ note.delete('/:id', async (req, res) => {
       // Remove the note from the array
       notes.splice(noteIndex, 1);
 
-      // Write updated data back to the file (assuming you have a writeToFile function)
+      // Write updated data back to the file
       await writeToFile('./db/db.json', (notes));
       console.log(notes);
 
