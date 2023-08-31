@@ -21,7 +21,7 @@ The following images show the web application's appearance and functionality:
 
 ## Additional Information
 
-On the back end, the application includes a `db.json` file that will be used to store and retrieve notes using the `fs` module and Express.js Routing/Serving static files.
+On the back end, the application includes a `db.json` file that will be used to store and retrieve notes using the `fs` module and `Express.js Routing/Serving static files`.
 
 ## License
 

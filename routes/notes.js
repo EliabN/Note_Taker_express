@@ -1,5 +1,5 @@
 const note = require('express').Router();
-const { readAndAppend } = require('../helpers/fsUtils');
+const { readAndAppend, writeToFile } = require('../helpers/fsUtils');
 const { v4: uuidv4 } = require('uuid');
 
 const util = require('util');
@@ -25,16 +25,37 @@ note.post('/', (req, res) => {
       };
   
       readAndAppend(newNote, './db/db.json');
-      res.json(`Tip added successfully`);
+      res.json(`Note added successfully`);
     } else {
       res.error('Error in adding tip');
     }
   }
 );
 
-// POST Route for a new note
-note.delete('/', (req, res) => {
-  res.send('Got a DELETE request at /user')
-})
+// Delete Route for a new note
+note.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const data = await readFromFile('./db/db.json'); // Use await for asynchronous operations
+    const notes = JSON.parse(data);
+    const noteIndex = notes.findIndex(note => note.id === id);
+
+    if (noteIndex !== -1) {
+      // Remove the note from the array
+      notes.splice(noteIndex, 1);
+
+      // Write updated data back to the file (assuming you have a writeToFile function)
+      await writeToFile('./db/db.json', (notes));
+      console.log(notes);
+
+      res.json({ message: 'Note deleted successfully' });
+    } else {
+      res.status.json({ error: 'Note not found' });
+    } 
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+  });
 
 module.exports = note;
