@@ -1,5 +1,6 @@
 const note = require('express').Router();
 const { readAndAppend } = require('../helpers/fsUtils');
+const { v4: uuidv4 } = require('uuid');
 
 const util = require('util');
 const fs = require('fs');
@@ -10,7 +11,7 @@ note.get('/', (req, res) => {
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
-// POST Route for a new UX/UI tip
+// POST Route for a new note
 note.post('/', (req, res) => {
     console.log(req.body);
   
@@ -20,7 +21,7 @@ note.post('/', (req, res) => {
       const newNote = {
           title,
           text,
-          //id: uuidv4(),
+          id: uuidv4(),
       };
   
       readAndAppend(newNote, './db/db.json');
@@ -30,5 +31,10 @@ note.post('/', (req, res) => {
     }
   }
 );
+
+// POST Route for a new note
+note.delete('/', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
 
 module.exports = note;

@@ -8,7 +8,7 @@ const { readAndAppend } = require('./helpers/fsUtils');
 // const fs = require('fs');
 // const readFromFile = util.promisify(fs.readFile);
 
-const PORT = process.env.port || 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
