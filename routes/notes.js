@@ -1,10 +1,19 @@
-const note = require('express').Router();
+// Import required modules and dependencies
+// Create an Express Router instance
+const note = require('express').Router(); 
+// Import custom file system utility functions
 const { readAndAppend, writeToFile } = require('../helpers/fsUtils');
-const { v4: uuidv4 } = require('uuid');
+// Import the uuidv4 function for generating unique IDs
+const { v4: uuidv4 } = require('uuid'); 
 
-const util = require('util');
-const fs = require('fs');
-const readFromFile = util.promisify(fs.readFile);
+// Import built-in Node.js modules for file system operations
+// Import the util module
+const util = require('util'); 
+// Import the fs module for file system operations
+const fs = require('fs'); 
+// Promisify the fs.readFile function for asynchronous file reading
+const readFromFile = util.promisify(fs.readFile); 
+
 
 // GET Route for retrieving all the 
 note.get('/', (req, res) => {
@@ -15,17 +24,21 @@ note.get('/', (req, res) => {
 note.post('/', (req, res) => {
     console.log(req.body);
   
+    // Get title and text from body
     const { title, text } = req.body;
   
+    // Check if the request body exists
     if (req.body) {
+      // Create a new note object
       const newNote = {
           title,
           text,
           id: uuidv4(),
       };
   
+      // Return message of error
       readAndAppend(newNote, './db/db.json');
-      res.json(`Note added successfully`);
+      res.json({ message: `Note added successfully`});
     } else {
       res.error('Error in adding tip');
     }
@@ -50,6 +63,7 @@ note.delete('/:id', async (req, res) => {
       await writeToFile('./db/db.json', (notes));
       console.log(notes);
 
+      // Return message of error
       res.json({ message: 'Note deleted successfully' });
     } else {
       res.status.json({ error: 'Note not found' });
@@ -57,6 +71,6 @@ note.delete('/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
-  });
+});
 
 module.exports = note;

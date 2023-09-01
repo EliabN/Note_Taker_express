@@ -33,6 +33,8 @@ This project license is under the [MIT](https://opensource.org/licenses/MIT)
 * [Express.js Demo](https://expressjs.com/en/starter/hello-world.html)
 * [Express.js basic-routing](https://expressjs.com/en/starter/basic-routing.html)
 * [Serving static files in Express](https://expressjs.com/en/starter/static-files.html)
+* [Express.js – app.delete() Method](https://www.tutorialspoint.com/express-js-app-delete-method)
+
 
 
 
