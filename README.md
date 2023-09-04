@@ -2,6 +2,8 @@
 
 Using [Heroku](https://www.heroku.com/what) to `deploy` an application called `Note Taker` that can be used to write and save notes. This application will use an `Express.js` back end and will save and retrieve note data from a `JSON file`.
 
+You can view and access the app/website here: [Note Taker](https://note-taker-express-js-en-247f09c848c9.herokuapp.com)
+
 
 ## User Story
 
